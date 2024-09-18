@@ -1,34 +1,36 @@
-import AWS from "aws-sdk"; // Import entire SDK (optional)
-// import AWS from 'aws-sdk/global'; // Import global AWS namespace (recommended)
-import S3 from "aws-sdk/clients/s3"; // Import only the S3 client
+import {
+  S3Client,
+  PutObjectCommand,
+  DeleteObjectCommand,
+} from "@aws-sdk/client-s3";
 
 const base_img = import.meta.env.VITE_BASE_IMAGE_LINK;
 const S3_BUCKET = import.meta.env.VITE_DEV_S3_BUCKET; // Replace with your bucket name
 const REGION = import.meta.env.VITE_REGION; // Replace with your region
+const ACCESS_KEY = import.meta.env.VITE_ACCESS_KEY;
+const S_ACCESS_KEY = import.meta.env.VITE_S_ACCESS_KEY;
 
-AWS.config.update({
-  accessKeyId: import.meta.env.VITE_ACCESS_KEY,
-  secretAccessKey: import.meta.env.VITE_S_ACCESS_KEY,
-});
-
-const s3 = new S3({
-  params: { Bucket: S3_BUCKET },
+const client = new S3Client({
   region: REGION,
+  credentials: {
+    accessKeyId: ACCESS_KEY,
+    secretAccessKey: S_ACCESS_KEY,
+  },
 });
 
 export const uploadFile = async (file: File) => {
   if (!file) return;
 
-  const params = {
+  const putCommand = new PutObjectCommand({
     Bucket: S3_BUCKET,
     Key: `image/${file.name}`,
     Body: file,
-  };
+  });
 
   try {
-    await s3.putObject(params).promise();
+    await client.send(putCommand);
 
-    return `${base_img}${params.Key}`;
+    return `${base_img}${`image/${file.name}`}`;
   } catch (error) {
     console.error(error);
     if (error instanceof Error) {
@@ -40,13 +42,13 @@ export const uploadFile = async (file: File) => {
 export const deleteFile = async (fileName: string) => {
   if (!fileName) return;
 
-  const params = {
+  const deleteCommand = new DeleteObjectCommand({
     Bucket: S3_BUCKET,
     Key: `image/${fileName}`,
-  };
+  });
 
   try {
-    await s3.deleteObject(params).promise();
+    await client.send(deleteCommand);
   } catch (error) {
     console.error(error);
   }
