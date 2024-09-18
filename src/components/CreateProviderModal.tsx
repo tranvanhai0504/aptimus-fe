@@ -10,7 +10,6 @@ import {
 } from "@nextui-org/react";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import useAuth from "../hooks/useAuth";
 import { addProvider } from "../utils/application";
 import { Auth_Providers } from "../@types/data";
 import { FcGoogle } from "react-icons/fc";
@@ -34,12 +33,9 @@ export default function CreateAuthProviderModal({
   setApp: React.Dispatch<React.SetStateAction<Application | null>>;
 }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  //   const { user, team } = useAuth();
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -59,15 +55,12 @@ export default function CreateAuthProviderModal({
 
     setIsLoading(false);
     onOpenChange(false);
-    if (newProvider) {
-      setIsSuccess(true);
-    }
   };
 
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
       <ModalContent>
-        {(onClose) => (
+        {() => (
           <>
             <ModalHeader className="flex flex-col gap-1 items-center">
               <div className="flex text-8xl items-center py-5">
@@ -113,7 +106,11 @@ export default function CreateAuthProviderModal({
                 />
                 {/* include validation with required or other standard HTML validation rules */}
 
-                <Button type="submit" className="!mt-8 font-bold">
+                <Button
+                  type="submit"
+                  className="!mt-8 font-bold"
+                  isLoading={isLoading}
+                >
                   Add
                 </Button>
               </form>

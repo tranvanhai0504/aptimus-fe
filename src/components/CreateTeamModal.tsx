@@ -9,7 +9,6 @@ import {
 } from "@nextui-org/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useAuth from "../hooks/useAuth";
-import { Link } from "react-router-dom";
 import { createTeam } from "../utils/team";
 import { useState } from "react";
 import { uploadFile } from "../utils/file";
@@ -26,13 +25,12 @@ export default function CreateTeamModal({
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
 }) {
-  const { user, team, setTeam } = useAuth();
+  const { user, setTeam } = useAuth();
   const [file, setFile] = useState<File | null>(null);
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {

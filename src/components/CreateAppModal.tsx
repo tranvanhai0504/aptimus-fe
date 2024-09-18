@@ -34,11 +34,10 @@ export default function CreateAppModal({
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [file, setFile] = useState<File | null>(null);
-  const { user, team } = useAuth();
+  const { team } = useAuth();
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -84,7 +83,7 @@ export default function CreateAppModal({
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
       <ModalContent>
-        {(onClose) =>
+        {() =>
           team ? (
             !isSuccess ? (
               <>

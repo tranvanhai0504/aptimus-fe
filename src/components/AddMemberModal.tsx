@@ -5,13 +5,12 @@ import {
   ModalBody,
   Button,
   Input,
-  Image,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useAuth from "../hooks/useAuth";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
-import { Team_user, TeamExtended } from "../@types/context";
+import { Team_user } from "../@types/context";
 import { addMemberByEmail } from "../utils/team";
 
 type Inputs = {
@@ -29,11 +28,10 @@ export default function AddMemberModal({
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { user, team } = useAuth();
+  const { team } = useAuth();
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -66,7 +64,7 @@ export default function AddMemberModal({
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
       <ModalContent>
-        {(onClose) =>
+        {() =>
           !isSuccess ? (
             <>
               <ModalHeader className="flex flex-col gap-1 items-center">

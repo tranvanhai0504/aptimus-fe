@@ -5,7 +5,6 @@ import {
   ModalBody,
   Button,
   Input,
-  Image,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -38,7 +37,6 @@ export default function ChangeAppInforModal({
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -90,7 +88,7 @@ export default function ChangeAppInforModal({
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
       <ModalContent>
-        {(onClose) =>
+        {() =>
           isSuccess ? (
             <>
               <ModalBody className="flex flex-col justify-center items-center py-10">

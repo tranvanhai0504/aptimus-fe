@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useKeylessAccounts } from "../../core/useKeylessAccounts";
-import { Button, Link } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import { LuLogOut } from "react-icons/lu";
-import { FaArrowLeftLong } from "react-icons/fa6";
 import { IoIosArrowBack } from "react-icons/io";
 
 const Header = () => {

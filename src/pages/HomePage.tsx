@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Accordion,
   AccordionItem,
@@ -18,7 +18,7 @@ const HomePage = () => {
   const [isCreateAppModalOpen, setIsCreateAppModalOpen] = React.useState(false);
   const [teams, setTeams] = React.useState<TeamExtended[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const { user, team } = useAuth();
+  const { user } = useAuth();
 
   React.useEffect(() => {
     if (!user) return;

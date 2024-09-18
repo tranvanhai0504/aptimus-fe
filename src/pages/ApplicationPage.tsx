@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Application, TeamExtended } from "../@types/context";
+import { Application } from "../@types/context";
 import { useLoaderData } from "react-router-dom";
 import { EphemeralKeyPair, isNumber } from "@aptos-labs/ts-sdk";
 import {
@@ -179,6 +179,7 @@ const ApplicationPage = () => {
                     className="w-1/2 bg-white text-[#32b97c] backdrop-blur-lg"
                     startContent={<HiOutlineArrowPath />}
                     onClick={generateKeys}
+                    isLoading={loadingKeys}
                   >
                     Generate new
                   </Button>

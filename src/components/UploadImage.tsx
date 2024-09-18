@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // Uncomment one of the following import options:
 import { Image } from "@nextui-org/react";
 import { LiaTimesSolid } from "react-icons/lia";
