@@ -7,6 +7,8 @@ import { FaApple } from "react-icons/fa";
 function LoginPage() {
   const ephemeralKeyPair = useEphemeralKeyPair();
 
+  console.log(`${window.location.origin}/callback`, GOOGLE_CLIENT_ID)
+
   const redirectUrl = new URL("https://accounts.google.com/o/oauth2/v2/auth");
 
   const searchParams = new URLSearchParams({
