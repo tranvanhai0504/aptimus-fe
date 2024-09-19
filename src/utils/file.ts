@@ -3,13 +3,12 @@ import {
   PutObjectCommand,
   DeleteObjectCommand,
 } from "@aws-sdk/client-s3";
-import "dotenv/config";
 
 const base_img = import.meta.env.VITE_BASE_IMAGE_LINK;
 const S3_BUCKET = import.meta.env.VITE_DEV_S3_BUCKET; // Replace with your bucket name
 const REGION = import.meta.env.VITE_REGION; // Replace with your region
-const ACCESS_KEY = process.env.ACCESS_KEY || "";
-const S_ACCESS_KEY = process.env.S_ACCESS_KEY || "";
+const ACCESS_KEY = import.meta.env.VITE_ACCESS_KEY;
+const S_ACCESS_KEY = import.meta.env.VITE_S_ACCESS_KEY;
 
 const client = new S3Client({
   region: REGION,
