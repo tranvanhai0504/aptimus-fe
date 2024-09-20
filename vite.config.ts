@@ -13,5 +13,14 @@ export default defineConfig(({ command, mode }) => {
         "./runtimeConfig": "./runtimeConfig.browser",
       },
     },
+    server: {
+      proxy: {
+        "/api": {
+          target: "http://34.204.90.7:8080",
+          changeOrigin: true,
+          secure: false,
+        },
+      },
+    },
   };
 });
